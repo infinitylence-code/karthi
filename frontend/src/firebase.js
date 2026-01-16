@@ -17,6 +17,17 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
+// Validate that all required Firebase config values are present
+const requiredConfigKeys = ['apiKey', 'authDomain', 'projectId', 'storageBucket', 'messagingSenderId', 'appId'];
+const missingKeys = requiredConfigKeys.filter(key => !firebaseConfig[key]);
+
+if (missingKeys.length > 0) {
+  console.error('❌ Missing Firebase configuration values:', missingKeys);
+  console.error('📋 Current config:', firebaseConfig);
+  console.error('⚠️ Please ensure all VITE_FIREBASE_* environment variables are set in Netlify');
+  throw new Error(`Missing Firebase configuration: ${missingKeys.join(', ')}`);
+}
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
