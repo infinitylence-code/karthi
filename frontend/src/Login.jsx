@@ -70,7 +70,7 @@ function Login({ onLogin }) {
                     name: userCredential.user.displayName || formData.email.split('@')[0],
                     email: userCredential.user.email,
                     createdAt: userCredential.user.metadata.creationTime || new Date().toISOString(),
-                    isAdmin: userCredential.user.email.toLowerCase() === 'karthi@gmail.com'
+                    isAdmin: userCredential.user.email.toLowerCase() === import.meta.env.VITE_ADMIN_EMAIL?.toLowerCase()
                 }
 
                 // Try to get additional data from Firestore (but don't fail if offline)

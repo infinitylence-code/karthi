@@ -55,7 +55,7 @@ function App() {
           name: firebaseUser.displayName || firebaseUser.email.split('@')[0],
           email: firebaseUser.email,
           createdAt: firebaseUser.metadata.creationTime || new Date().toISOString(),
-          isAdmin: firebaseUser.email.toLowerCase() === 'karthi@gmail.com'
+          isAdmin: firebaseUser.email.toLowerCase() === import.meta.env.VITE_ADMIN_EMAIL?.toLowerCase()
         }
 
         // Try to enhance with Firestore data

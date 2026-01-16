@@ -89,6 +89,7 @@ Don't forget to add your environment variables in Netlify:
    - `VITE_FIREBASE_STORAGE_BUCKET`
    - `VITE_FIREBASE_MESSAGING_SENDER_ID`
    - `VITE_FIREBASE_APP_ID`
+   - `VITE_ADMIN_EMAIL` (e.g., Karthi@gmail.com)
    - `VITE_EMAILJS_SERVICE_ID`
    - `VITE_EMAILJS_TEMPLATE_ID`
    - `VITE_EMAILJS_PUBLIC_KEY`

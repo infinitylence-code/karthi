@@ -9,7 +9,7 @@ function Profile({ user, onLogout, onUpdateUser, wishlist = [], cart = [] }) {
     const productImageRef = useRef(null)
 
     // Check if user is admin (either by email or isAdmin field)
-    const isAdmin = user.email.toLowerCase() === 'karthi@gmail.com' || user.isAdmin === true
+    const isAdmin = user.email.toLowerCase() === import.meta.env.VITE_ADMIN_EMAIL?.toLowerCase() || user.isAdmin === true
 
     // Debug logging
     console.log('Profile - User Email:', user.email)
@@ -525,7 +525,7 @@ function Profile({ user, onLogout, onUpdateUser, wishlist = [], cart = [] }) {
                                         </thead>
                                         <tbody>
                                             {allUsers.map((u, index) => {
-                                                const userIsAdmin = u.email.toLowerCase() === 'karthi@gmail.com' || u.isAdmin === true
+                                                const userIsAdmin = u.email.toLowerCase() === import.meta.env.VITE_ADMIN_EMAIL?.toLowerCase() || u.isAdmin === true
                                                 return (
                                                     <tr key={u.id || index}>
                                                         <td>#{u.id}</td>
@@ -555,7 +555,7 @@ function Profile({ user, onLogout, onUpdateUser, wishlist = [], cart = [] }) {
                                                             </span>
                                                         </td>
                                                         <td>
-                                                            {u.email.toLowerCase() !== 'karthi@gmail.com' && (
+                                                            {u.email.toLowerCase() !== import.meta.env.VITE_ADMIN_EMAIL?.toLowerCase() && (
                                                                 <button
                                                                     className={`admin-toggle-btn ${userIsAdmin ? 'remove' : 'make'}`}
                                                                     onClick={() => handleToggleAdmin(u)}
