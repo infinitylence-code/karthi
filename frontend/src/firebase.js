@@ -22,18 +22,6 @@ const requiredConfigKeys = ['apiKey', 'authDomain', 'projectId', 'storageBucket'
 const missingKeys = requiredConfigKeys.filter(key => !firebaseConfig[key]);
 
 if (missingKeys.length > 0) {
-  const errorMessage = `
-    ❌ Missing Firebase configuration: ${missingKeys.join(', ')}
-    
-    🔧 If you're deploying to Netlify:
-    1. Go to your Netlify dashboard
-    2. Navigate to Site settings → Environment variables
-    3. Add all VITE_FIREBASE_* variables from your .env file
-    4. Redeploy your site
-    
-    📖 See NETLIFY_SETUP.md for detailed instructions
-  `;
-  console.error(errorMessage);
   throw new Error(`Missing Firebase configuration: ${missingKeys.join(', ')}`);
 }
 
