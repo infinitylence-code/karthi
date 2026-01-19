@@ -39,7 +39,6 @@ function App() {
       }))
       setProducts(productsData)
     }, (error) => {
-      console.error("Error fetching products:", error)
     })
 
     return () => unsubscribe()
@@ -83,7 +82,6 @@ function App() {
             setOrders(ordersData)
           }
         } catch (error) {
-          console.warn('Firestore unavailable, using auth data:', error)
         }
 
         setCurrentUser(userData)
@@ -105,7 +103,6 @@ function App() {
         try {
           await updateDoc(doc(db, 'users', currentUser.id), { wishlist })
         } catch (error) {
-          console.error("Error syncing wishlist:", error)
         }
       }
     }
@@ -119,7 +116,6 @@ function App() {
         try {
           await updateDoc(doc(db, 'users', currentUser.id), { cart })
         } catch (error) {
-          console.error("Error syncing cart:", error)
         }
       }
     }
@@ -145,7 +141,6 @@ function App() {
       setCart([])
       setWishlist([])
     } catch (error) {
-      console.error('Logout error:', error)
     }
   }
 
@@ -164,7 +159,6 @@ function App() {
           wishlist: newWishlist
         })
       } catch (error) {
-        console.error("Error saving wishlist:", error)
       }
     }
   }
@@ -183,7 +177,6 @@ function App() {
           cart: newCart
         })
       } catch (error) {
-        console.error("Error saving cart:", error)
       }
     }
   }
@@ -205,7 +198,6 @@ function App() {
       try {
         await setDoc(doc(db, 'users', currentUser.id, 'orders', orderId), newOrder)
       } catch (error) {
-        console.error("Error saving order to sub-collection:", error)
       }
     }
   }
@@ -218,7 +210,6 @@ function App() {
     try {
       await updateDoc(doc(db, 'users', updatedUser.id), updatedUser)
     } catch (error) {
-      console.error('Error updating user in Firestore:', error)
     }
   }
 

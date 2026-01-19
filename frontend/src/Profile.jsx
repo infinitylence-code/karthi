@@ -11,10 +11,7 @@ function Profile({ user, onLogout, onUpdateUser, wishlist = [], cart = [] }) {
     // Check if user is admin (either by email or isAdmin field)
     const isAdmin = user.email.toLowerCase() === import.meta.env.VITE_ADMIN_EMAIL?.toLowerCase() || user.isAdmin === true
 
-    // Debug logging
-    console.log('Profile - User Email:', user.email)
-    console.log('Profile - User isAdmin field:', user.isAdmin)
-    console.log('Profile - Computed isAdmin:', isAdmin)
+
 
     // Tab state
     const [activeTab, setActiveTab] = useState('account')
@@ -169,7 +166,6 @@ function Profile({ user, onLogout, onUpdateUser, wishlist = [], cart = [] }) {
                 })
                 setProductErrors({})
             } catch (error) {
-                console.error('Error uploading product:', error)
                 alert('Failed to upload product. Please try again.')
             }
         }
@@ -198,7 +194,6 @@ function Profile({ user, onLogout, onUpdateUser, wishlist = [], cart = [] }) {
             })
             setAllMessages(messages)
         } catch (error) {
-            console.error('Error fetching messages:', error)
             alert('Failed to load messages. Please try again.')
         } finally {
             setLoadingMessages(false)
@@ -220,7 +215,6 @@ function Profile({ user, onLogout, onUpdateUser, wishlist = [], cart = [] }) {
 
             alert('Order marked as done and removed successfully!')
         } catch (error) {
-            console.error('Error deleting message:', error)
             alert('Failed to mark order as done. Please try again.')
         }
     }
@@ -244,7 +238,6 @@ function Profile({ user, onLogout, onUpdateUser, wishlist = [], cart = [] }) {
             })
             setAllUsers(users)
         } catch (error) {
-            console.error('Error fetching users:', error)
             alert('Failed to load users. Please try again.')
         } finally {
             setLoadingUsers(false)
@@ -263,7 +256,6 @@ function Profile({ user, onLogout, onUpdateUser, wishlist = [], cart = [] }) {
             refreshUsers()
             alert(`${targetUser.name} is now ${newAdminStatus ? 'an admin' : 'a regular user'}`)
         } catch (error) {
-            console.error('Error toggling admin status:', error)
             alert('Failed to update admin status. Please try again.')
         }
     }

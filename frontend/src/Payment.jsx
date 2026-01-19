@@ -177,7 +177,6 @@ function Payment({ cart, setCart, products, currentUser, addOrder }) {
                                             timestamp: new Date().toISOString()
                                         });
                                     } catch (err) {
-                                        console.error("Failed to save order to admin collection:", err);
                                         alert("Warning: Order saved to your history but may not appear in admin panel. Please contact support.");
                                     }
 

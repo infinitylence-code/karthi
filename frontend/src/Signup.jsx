@@ -94,7 +94,6 @@ function Signup({ onSignup }) {
                 }
 
                 const firestorePromise = setDoc(doc(db, 'users', userCredential.user.uid), userData).catch(err => {
-                    console.warn('Firestore write failed (offline):', err.message)
                 })
 
                 // Wait for both to complete
@@ -104,7 +103,6 @@ function Signup({ onSignup }) {
                 onSignup(userData)
                 navigate('/')
             } catch (error) {
-                console.error('Signup error:', error.code)
 
                 let errorMessage = 'An error occurred during signup'
 

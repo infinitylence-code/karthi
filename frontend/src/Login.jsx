@@ -81,14 +81,11 @@ function Login({ onLogin }) {
                         userData = { ...userData, ...userDoc.data() }
                     }
                 } catch (firestoreError) {
-                    // Firestore is offline or unavailable - that's okay, we'll use auth data
-                    console.warn('⚠️ Firestore unavailable, using Firebase Auth data only:', firestoreError.message)
                 }
 
                 onLogin(userData)
                 navigate('/')
             } catch (error) {
-                console.error('❌ Login error:', error.code, error.message)
 
                 let errorMessage = 'Invalid email or password'
 

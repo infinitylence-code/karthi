@@ -188,10 +188,10 @@
     letter-spacing: 0.05em;
 }
 
-.order-status.processing {
+/* .order-status.processing {
     background: #fee2e2;
     color: #991b1b;
-}
+} */
 
 .order-status.shipped {
     background: #dcfce7;
