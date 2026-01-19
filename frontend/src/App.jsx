@@ -213,6 +213,23 @@ function App() {
     }
   }
 
+  const deleteProduct = async (productId) => {
+    if (!currentUser?.isAdmin) {
+      alert('Only admins can delete products')
+      return
+    }
+
+    if (window.confirm('Are you sure you want to delete this product?')) {
+      try {
+        const { deleteDoc } = await import('firebase/firestore')
+        await deleteDoc(doc(db, 'products', productId))
+        alert('Product deleted successfully!')
+      } catch (error) {
+        alert('Failed to delete product. Please try again.')
+      }
+    }
+  }
+
   // Show loading state while checking auth
   if (loading) {
     return <LoadingSpinner />
@@ -257,6 +274,7 @@ function App() {
                   setWishlist={updateWishlist}
                   cart={cart}
                   setCart={updateCart}
+                  deleteProduct={deleteProduct}
                 />
               ) : (
                 <Navigate to="/login" replace />
