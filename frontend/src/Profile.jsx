@@ -137,11 +137,19 @@ function Profile({ user, onLogout, onUpdateUser, wishlist = [], cart = [] }) {
         e.preventDefault()
         if (validateProductForm()) {
             try {
+                let normalizedCategory = productData.category.toString().trim()
+                if (normalizedCategory) {
+                    normalizedCategory = normalizedCategory.charAt(0).toUpperCase() + normalizedCategory.slice(1).toLowerCase()
+                }
+                if (normalizedCategory === 'T-shirt' || normalizedCategory === 'T shirt') {
+                    normalizedCategory = 'Tshirt'
+                }
+
                 const newProduct = {
                     id: Date.now().toString(),
-                    name: productData.name,
-                    category: productData.category,
-                    description: productData.description,
+                    name: productData.name.trim(),
+                    category: normalizedCategory,
+                    description: productData.description.trim(),
                     sizePricing: productData.sizePricing,
                     sizes: Object.keys(productData.sizePricing), // For backward compatibility
                     image: productData.image

@@ -33,10 +33,27 @@ function App() {
   // Listen for products from Firestore
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, 'products'), (snapshot) => {
-      const productsData = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }))
+      const productsData = snapshot.docs.map(doc => {
+        const data = doc.data()
+        let cat = data.category || ''
+
+        // Normalize category String
+        cat = cat.toString().trim()
+        if (cat) {
+          cat = cat.charAt(0).toUpperCase() + cat.slice(1).toLowerCase()
+        }
+
+        // Merge variations of T-Shirt
+        if (cat === 'T-shirt' || cat === 'T shirt') {
+          cat = 'Tshirt'
+        }
+
+        return {
+          id: doc.id,
+          ...data,
+          category: cat
+        }
+      })
       setProducts(productsData)
     }, (error) => {
     })
@@ -265,20 +282,16 @@ function App() {
           <Route
             path="/"
             element={
-              currentUser ? (
-                <Dashboard
-                  products={products}
-                  currentUser={currentUser}
-                  onLogout={handleLogout}
-                  wishlist={wishlist}
-                  setWishlist={updateWishlist}
-                  cart={cart}
-                  setCart={updateCart}
-                  deleteProduct={deleteProduct}
-                />
-              ) : (
-                <Navigate to="/login" replace />
-              )
+              <Dashboard
+                products={products}
+                currentUser={currentUser}
+                onLogout={handleLogout}
+                wishlist={wishlist}
+                setWishlist={updateWishlist}
+                cart={cart}
+                setCart={updateCart}
+                deleteProduct={deleteProduct}
+              />
             }
           />
           <Route
@@ -300,35 +313,27 @@ function App() {
           <Route
             path="/wishlist"
             element={
-              currentUser ? (
-                <Wishlist
-                  products={products}
-                  currentUser={currentUser}
-                  wishlist={wishlist}
-                  setWishlist={updateWishlist}
-                  cart={cart}
-                  setCart={updateCart}
-                />
-              ) : (
-                <Navigate to="/login" replace />
-              )
+              <Wishlist
+                products={products}
+                currentUser={currentUser}
+                wishlist={wishlist}
+                setWishlist={updateWishlist}
+                cart={cart}
+                setCart={updateCart}
+              />
             }
           />
           <Route
             path="/cart"
             element={
-              currentUser ? (
-                <Cart
-                  products={products}
-                  currentUser={currentUser}
-                  wishlist={wishlist}
-                  setWishlist={updateWishlist}
-                  cart={cart}
-                  setCart={updateCart}
-                />
-              ) : (
-                <Navigate to="/login" replace />
-              )
+              <Cart
+                products={products}
+                currentUser={currentUser}
+                wishlist={wishlist}
+                setWishlist={updateWishlist}
+                cart={cart}
+                setCart={updateCart}
+              />
             }
           />
           <Route
